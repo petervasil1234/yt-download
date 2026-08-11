@@ -1,0 +1,200 @@
+@import 'tailwindcss';
+
+/*
+ * Palette and typography carried over from hypo-calculator, so the projects look like one family.
+ *
+ * Layers: raw palette (--bg, --ink, --brand, …) → shadcn tokens (--background, --primary, …)
+ * → Tailwind utilities (--color-*). shadcn components then look like hypo-calculator without a
+ * single class being changed inside them.
+ *
+ * The brand teal is deliberately --brand, not --accent: shadcn reserves the name --accent for a
+ * subtle hover background, and the collision would recolour half the components.
+ */
+@theme {
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif;
+  --font-mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+:root {
+  --bg: #f4f6f5;
+  --surface: #ffffff;
+  --surface-2: #edf1f0;
+  --ink: #14201e;
+  --ink-2: #536260;
+  --ink-3: #7c8c89;
+  --line: #d8e0de;
+  --line-strong: #b9c6c3;
+  --brand: #14635b;
+  --brand-ink: #ffffff;
+  --brand-soft: #e2edeb;
+  --ok: #1e7a4e;
+  --ok-ink: #ffffff;
+  --ok-soft: #e1f0e7;
+  --warn: #9e7025;
+  --warn-soft: #f6eddc;
+  --bad: #a3382f;
+  --bad-ink: #ffffff;
+  --bad-soft: #f7e5e2;
+  --shadow: 0 1px 2px rgba(20, 32, 30, 0.05), 0 8px 24px -16px rgba(20, 32, 30, 0.18);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #0e1615;
+    --surface: #16211f;
+    --surface-2: #1d2a28;
+    --ink: #e6edeb;
+    --ink-2: #94a4a1;
+    --ink-3: #74837f;
+    --line: #27352f;
+    --line-strong: #3a4a45;
+    --brand: #58bcae;
+    --brand-ink: #0e1615;
+    --brand-soft: #17302d;
+    --ok: #55c289;
+    --ok-ink: #0e1615;
+    --ok-soft: #142c21;
+    --warn: #d3a24e;
+    --warn-soft: #2e2517;
+    --bad: #e17c72;
+    --bad-ink: #0e1615;
+    --bad-soft: #331b19;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px -16px rgba(0, 0, 0, 0.6);
+  }
+}
+
+:root[data-theme='dark'] {
+  --bg: #0e1615;
+  --surface: #16211f;
+  --surface-2: #1d2a28;
+  --ink: #e6edeb;
+  --ink-2: #94a4a1;
+  --ink-3: #74837f;
+  --line: #27352f;
+  --line-strong: #3a4a45;
+  --brand: #58bcae;
+  --brand-ink: #0e1615;
+  --brand-soft: #17302d;
+  --ok: #55c289;
+  --ok-ink: #0e1615;
+  --ok-soft: #142c21;
+  --warn: #d3a24e;
+  --warn-soft: #2e2517;
+  --bad: #e17c72;
+  --bad-ink: #0e1615;
+  --bad-soft: #331b19;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px -16px rgba(0, 0, 0, 0.6);
+}
+
+/* shadcn tokens on top of our palette. */
+:root {
+  --radius: 12px;
+  --background: var(--bg);
+  --foreground: var(--ink);
+  --card: var(--surface);
+  --card-foreground: var(--ink);
+  --popover: var(--surface);
+  --popover-foreground: var(--ink);
+  --primary: var(--brand);
+  --primary-foreground: var(--brand-ink);
+  --secondary: var(--surface-2);
+  --secondary-foreground: var(--ink);
+  --muted: var(--surface-2);
+  --muted-foreground: var(--ink-2);
+  --accent: var(--brand-soft);
+  --accent-foreground: var(--brand);
+  --destructive: var(--bad);
+  --destructive-foreground: var(--bad-ink);
+  --border: var(--line);
+  --input: var(--line-strong);
+  --ring: var(--brand);
+}
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-brand: var(--brand);
+  --color-brand-ink: var(--brand-ink);
+  --color-brand-soft: var(--brand-soft);
+  --color-ok: var(--ok);
+  --color-ok-soft: var(--ok-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-bad: var(--bad);
+  --color-bad-soft: var(--bad-soft);
+
+  --shadow-card: var(--shadow);
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    color-scheme: light dark;
+  }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+  }
+}
+
+/* Mono small-caps above a heading — taken from hypo-calculator. */
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--brand);
+}
+
+@utility display {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+  text-wrap: balance;
+}
